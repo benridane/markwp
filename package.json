@@ -21,16 +21,16 @@
     "cli",
     "blocks"
   ],
-  "author": "",
+  "author": "benridane",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/markwp.git"
+    "url": "git+https://github.com/benridane/markwp.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/markwp/issues"
+    "url": "https://github.com/benridane/markwp/issues"
   },
-  "homepage": "https://github.com/yourusername/markwp#readme",
+  "homepage": "https://github.com/benridane/markwp#readme",
   "engines": {
     "node": ">=16.0.0"
   },

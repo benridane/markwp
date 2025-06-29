@@ -19,7 +19,7 @@ npm install -g markwp
 
 ### From source
 ```bash
-git clone https://github.com/yourusername/markwp.git
+git clone https://github.com/benridane/markwp.git
 cd markwp
 npm install
 npm run build
@@ -74,7 +74,7 @@ markwp "## Heading\n\nThis is a paragraph with **bold** text." -p
 
 ### Setup
 ```bash
-git clone https://github.com/yourusername/markwp.git
+git clone https://github.com/benridane/markwp.git
 cd markwp
 npm install
 ```

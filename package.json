@@ -1,0 +1,51 @@
+{
+  "name": "markwp",
+  "version": "1.0.0",
+  "description": "Convert Markdown files to WordPress Gutenberg block format",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "start": "node dist/index.js",
+    "test": "echo \"No tests yet\"",
+    "clean": "rm -rf dist"
+  },
+  "bin": {
+    "markwp": "./dist/index.js"
+  },
+  "keywords": [
+    "markdown",
+    "gutenberg",
+    "wordpress",
+    "converter",
+    "cli",
+    "blocks"
+  ],
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/markwp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/markwp/issues"
+  },
+  "homepage": "https://github.com/yourusername/markwp#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "@types/markdown-it": "^14.1.2",
+    "@types/node": "^24.0.7",
+    "commander": "^14.0.0",
+    "markdown-it": "^14.1.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}

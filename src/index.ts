@@ -1,0 +1,52 @@
+#!/usr/bin/env node
+import { Command } from 'commander';
+import { readFileSync, writeFileSync } from 'fs';
+import { resolve } from 'path';
+import { convertMarkdownToGutenberg } from './converter';
+
+const program = new Command();
+
+program
+  .name('markwp')
+  .description('Convert Markdown to WordPress Gutenberg blocks format')
+  .version('1.0.0')
+  .argument('<input>', 'Input Markdown text or file path')
+  .argument('[output]', 'Output file path (optional, defaults to stdout)')
+  .option('-f, --file', 'Treat input as file path instead of text')
+  .option('-d, --debug', 'Enable debug mode')
+  .option('-p, --pretty', 'Pretty print output')
+  .action((input, output, options) => {
+    try {
+      let markdownContent: string;
+      
+      if (options.file) {
+        // ファイルパスとして扱う
+        markdownContent = readFileSync(input, 'utf8');
+      } else {
+        // 直接テキストとして扱う
+        markdownContent = input;
+      }
+      
+      const gutenbergOutput = convertMarkdownToGutenberg(markdownContent, {
+        pretty: options.pretty,
+        debug: options.debug
+      });
+      
+      if (output) {
+        // ファイルに出力
+        const outputPath = resolve(output);
+        writeFileSync(outputPath, gutenbergOutput, 'utf-8');
+        if (options.debug) {
+          console.error(`Output written to: ${outputPath}`);
+        }
+      } else {
+        // 標準出力
+        console.log(gutenbergOutput);
+      }
+    } catch (error) {
+      console.error('Error:', error instanceof Error ? error.message : error);
+      process.exit(1);
+    }
+  });
+
+program.parse();

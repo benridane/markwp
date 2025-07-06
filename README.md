@@ -9,6 +9,7 @@ A command-line tool to convert Markdown files to WordPress Gutenberg block forma
 - Command-line interface with flexible input/output options
 - Pretty printing and debug modes
 - TypeScript implementation
+- MCP (Model Context Protocol) server mode for integration with AI tools
 
 ## Installation
 
@@ -51,6 +52,7 @@ markwp -f input.md -d
 - `-f, --file`: Treat input as file path instead of text
 - `-d, --debug`: Enable debug mode
 - `-p, --pretty`: Pretty print output
+- `--mcp`: Run as MCP server (stdio transport)
 - `-h, --help`: Display help information
 - `-V, --version`: Display version number
 
@@ -65,6 +67,18 @@ markwp -f example.md -p > output.html
 ```bash
 markwp "## Heading\n\nThis is a paragraph with **bold** text." -p
 ```
+
+### Running as MCP server
+```bash
+# Start the MCP server
+markwp --mcp
+
+# The server will expose two tools via stdio:
+# - convert_markdown: Convert Markdown text to Gutenberg format
+# - convert_file: Convert a Markdown file to Gutenberg format
+```
+
+When running in MCP mode, the tool integrates with AI assistants and other MCP-compatible clients, allowing them to use MarkWP's conversion capabilities programmatically.
 
 ## Development
 

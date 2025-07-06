@@ -31,10 +31,10 @@ program
       let markdownContent: string;
       
       if (options.file) {
-        // ファイルパスとして扱う
+        // Treat input as file path
         markdownContent = readFileSync(input, 'utf8');
       } else {
-        // 直接テキストとして扱う
+        // Treat input as text directly
         markdownContent = input;
       }
       
@@ -44,14 +44,14 @@ program
       });
       
       if (output) {
-        // ファイルに出力
+        // Output to file
         const outputPath = resolve(output);
         writeFileSync(outputPath, gutenbergOutput, 'utf-8');
         if (options.debug) {
           console.error(`Output written to: ${outputPath}`);
         }
       } else {
-        // 標準出力
+        // Output to stdout
         console.log(gutenbergOutput);
       }
     } catch (error) {

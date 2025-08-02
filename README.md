@@ -53,6 +53,8 @@ markwp -f input.md -d
 - `-d, --debug`: Enable debug mode
 - `-p, --pretty`: Pretty print output
 - `--mcp`: Run as MCP server (stdio transport)
+- `--mcp-http`: Run as MCP HTTP server (streamable HTTP transport)
+- `--port <port>`: Port for HTTP server (default: 3000)
 - `-h, --help`: Display help information
 - `-V, --version`: Display version number
 
@@ -69,16 +71,53 @@ markwp "## Heading\n\nThis is a paragraph with **bold** text." -p
 ```
 
 ### Running as MCP server
-```bash
-# Start the MCP server
-markwp --mcp
 
-# The server will expose two tools via stdio:
-# - convert_markdown: Convert Markdown text to Gutenberg format
-# - convert_file: Convert a Markdown file to Gutenberg format
+#### Stdio Transport
+```bash
+# Start the MCP server with stdio transport
+markwp --mcp
 ```
 
+#### HTTP Transport
+```bash
+# Start the MCP HTTP server (default port 3000)
+markwp --mcp-http
+
+# Start with custom port
+markwp --mcp-http --port 8080
+
+# Start with Bearer authentication
+API_TOKEN=your-secret-token markwp --mcp-http
+```
+
+The servers expose two tools:
+- `convert_markdown`: Convert Markdown text to Gutenberg format
+- `convert_file`: Convert a Markdown file to Gutenberg format
+
 When running in MCP mode, the tool integrates with AI assistants and other MCP-compatible clients, allowing them to use MarkWP's conversion capabilities programmatically.
+
+### Docker Usage
+
+```bash
+# Create .env file with your API token
+echo "API_TOKEN=your-secret-token" > .env
+
+# Start with Docker Compose
+docker-compose up -d
+
+# The HTTP server will be available at http://localhost:3000/mcp
+```
+
+### Testing with MCP Inspector
+
+```bash
+# Test with CLI
+npx @modelcontextprotocol/inspector --cli http://localhost:3000/mcp
+
+# Test with UI
+npx @modelcontextprotocol/inspector
+# Then connect to http://localhost:3000/mcp
+```
 
 ## Development
 

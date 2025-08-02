@@ -4,6 +4,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
 import { convertMarkdownToGutenberg } from './converter';
 import { runMcpServer } from './mcp-server';
+import { runMcpHttpServer } from './http-transport';
 
 const program = new Command();
 
@@ -11,7 +12,9 @@ program
   .name('markwp')
   .description('Convert Markdown to WordPress Gutenberg blocks format')
   .version('1.0.0')
-  .option('--mcp', 'Run as MCP server')
+  .option('--mcp', 'Run as MCP server (stdio transport)')
+  .option('--mcp-http', 'Run as MCP HTTP server')
+  .option('--port <port>', 'Port for HTTP server (default: 3000)', '3000')
   .argument('[input]', 'Input Markdown text or file path')
   .argument('[output]', 'Output file path (optional, defaults to stdout)')
   .option('-f, --file', 'Treat input as file path instead of text')
@@ -20,6 +23,12 @@ program
   .action(async (input, output, options) => {
     if (options.mcp) {
       await runMcpServer();
+      return;
+    }
+    
+    if (options.mcpHttp) {
+      const port = parseInt(options.port);
+      await runMcpHttpServer(port);
       return;
     }
 
